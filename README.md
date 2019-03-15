@@ -308,7 +308,7 @@ int main() {
 ```
 
 ### Penjelasan
-Pada soal ini dibutuhkan untuk mendaptakan waktu akses file dan waktu sekarang.rawtime adalah waktu yang sekarang dan access adalah waktu akses file makan_enak.txt dengan menggunakan st.atime. JIka file pernah diakses kurang lebih 30 detik yang lalu maka akan membuat file baru makan_sehat#.txt.
+Pada soal ini dibutuhkan untuk mendaptakan waktu akses file dan waktu sekarang.rawtime adalah waktu yang sekarang dan access adalah waktu akses file makan_enak.txt dengan menggunakan st.atime. JIka file pernah diakses kurang lebih 30 detik yang lalu maka akan membuat file baru makan_sehat#.txt. sprintf digunakan untuk menambahkan string ke variabel nama. Yang ditambahkan adalah maka_sehat%d, dimana %d adalah nilai urutan. fopen file digunakan untuk membuat file dengan nama nilai dari variabel lokasi.
 
 ## Soal 5
 5. Kerjakan poin a dan b di bawah:
@@ -398,4 +398,4 @@ while(1){
 }
 ```
 ### Penjelasan
-Untuk membuat folder bernama waktu sekarang menggunakan mkdir. Waktu didapatkan dengan cara strftime. Urutan selalu ditambah tiap menit. Lalu setelah 30 menit membuat folder baru. Karena membutuhkan exec maka dibuat child tiap akan menjalankannya. var/log/syslog di copy ke nama file yang baru. Karena file belum ada maka file baru akan terbentuk
+Untuk membuat folder bernama waktu sekarang menggunakan mkdir. Waktu didapatkan dengan cara strftime. Urutan selalu ditambah tiap menit. Lalu setelah 30 menit membuat folder baru. Urutan juga digunakan untuk menghitung waktu. sleep(60) artinya program berjalan tiap menit sekali. Begitu juga dengan urutan, bertambah tiap menit sekali. Jika urutan sama dengan 30 maka artinya waktu yang terlewat sudah 30 menit. Karena membutuhkan exec maka dibuat child tiap akan menjalankannya. var/log/syslog di copy ke nama file yang baru. Karena file belum ada maka file baru akan terbentuk
