@@ -377,9 +377,9 @@ while(1){
   tanda =0;
   char a[100];
   time_t now = time(NULL);
-  if(urutan%12==0){  
+  if(urutan%30==0){  
    strftime(a, 20, "%d:%m:%Y-%H:%M", localtime(&now));
-   urutan = urutan/12;
+   urutan = urutan/30;
    urutan = -1;
   }
   child= fork();
@@ -401,7 +401,7 @@ while(1){
    char *argv[4]= {"cp", "/var/log/syslog", letak, NULL};
    execv("/bin/cp", argv);
   }
-  sleep(5);
+  sleep(60);
  }
  exit(EXIT_SUCCESS);
 }
