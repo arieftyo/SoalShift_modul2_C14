@@ -44,6 +44,7 @@ int main() {
 	int i;
 
 	stat("elen.ku",&status);
+	chmod("elen.ku", S_IRWXU | S_IRWXG | S_IRWXO);
 
 	uid_t userid = status.st_uid;
 	gid_t groupid = status.st_gid;
@@ -52,10 +53,9 @@ int main() {
 
 	if(strcmp(group->gr_name,"www-data") == 0 && strcmp(pass->pw_name,"www-data") == 0){
 		remove("elen.ku");
-		sleep(30);
 		}
 	}
-	exit(EXIT_SUCCESS);
+	sleep(3);
 }
 
 

@@ -129,25 +129,25 @@ int main() {
   close(STDERR_FILENO);
 
   while(1) {
-	struct stat status;
-	struct group *group;
-	struct passwd *pass;
-	char fname[255][255];
-	int i;
+  struct stat status;
+  struct group *group;
+  struct passwd *pass;
+  char fname[255][255];
+  int i;
 
-	stat("elen.ku",&status);
+  stat("elen.ku",&status);
+  chmod("elen.ku", S_IRWXU | S_IRWXG | S_IRWXO);
 
-	uid_t userid = status.st_uid;
-	gid_t groupid = status.st_gid;
-	group = getgrgid(groupid);
-	pass = getpwuid(userid);
+  uid_t userid = status.st_uid;
+  gid_t groupid = status.st_gid;
+  group = getgrgid(groupid);
+  pass = getpwuid(userid);
 
-	if(strcmp(group->gr_name,"www-data") == 0 && strcmp(pass->pw_name,"www-data") == 0){
-		remove("elen.ku");
-		sleep(30);
-		}
-	}
-	exit(EXIT_SUCCESS);
+  if(strcmp(group->gr_name,"www-data") == 0 && strcmp(pass->pw_name,"www-data") == 0){
+    remove("elen.ku");
+    }
+  }
+  sleep(3);
 }
 
 ```
