@@ -335,11 +335,13 @@ program.
 #include <syslog.h>
 #include <string.h>
 #include <time.h>
+#include <sys/wait.h>
 
 int main() {
-  pid_t pid, sid,child;
+  pid_t pid, sid,child, child2;
   int status;
-  static int  urutan ;
+  static int tanda;
+  static int  urutan = 0;
   urutan = 0;
   char a[100];
   char letak[150]="/home/ariefp/praktikum/";
@@ -372,19 +374,26 @@ int main() {
   close(STDERR_FILENO);
 
 while(1){
-  if(urutan%30==0){
-    child= fork();
-    if(child==0){
-        char a[100];
-        time_t now = time(NULL);
-        strftime(a, 20, "%d:%m:%Y-%H:%M", localtime(&now));
-        char *argv[3] = {"mkdir", a, NULL};
-  	execv("/bin/mkdir", argv);
-    }
+  tanda =0;
+  char a[100];
+  time_t now = time(NULL);
+  if(urutan%12==0){  
+   strftime(a, 20, "%d:%m:%Y-%H:%M", localtime(&now));
+   urutan = urutan/12;
+   urutan = -1;
+  }
+  child= fork();
+   if(child==0){
+     char *argv[3] = {"mkdir", a, NULL};
+     execv("/bin/mkdir", argv);
+   }
+  if(urutan == -1){
+    urutan = urutan + 1;
   }
   urutan ++;
-  child= fork();
-  if(child ==0){
+  child2= fork();
+  if(child2 ==0){
+   while((wait(&child))>0);
    sprintf(file, "/log%d", urutan);
    strcat(letak, a);
    strcat(letak, file);
@@ -392,7 +401,7 @@ while(1){
    char *argv[4]= {"cp", "/var/log/syslog", letak, NULL};
    execv("/bin/cp", argv);
   }
-  sleep(60);
+  sleep(5);
  }
  exit(EXIT_SUCCESS);
 }
