@@ -52,7 +52,7 @@ while(1){
   time_t now = time(NULL);
   if(urutan%30==0){  
    strftime(a, 20, "%d:%m:%Y-%H:%M", localtime(&now));
-   urutan = urutan/12;
+   urutan = urutan/30;
    urutan = -1;
   }
   child= fork();
